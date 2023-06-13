@@ -81,22 +81,82 @@
 
 ## 3. 분석 결과
 만타 지역
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c5478b8c-2089-4f34-b313-4a2c41d62159/Untitled.png)
+![image](https://github.com/gaeju/Manta-Favorita-Station-53-Reverse-Plan/assets/100760127/d4735f7c-072b-4a22-8cae-b159e2b831dd)
 
 A타입
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4d53fe0b-4aee-4556-870f-6fca5405ed8c/Untitled.png)
+![image](https://github.com/gaeju/Manta-Favorita-Station-53-Reverse-Plan/assets/100760127/ec2eacbb-52d2-491f-970f-ef43f60f5f6f)
 
 입점 예상 품목
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ced301af-26c8-459b-8015-48b810d9881e/Untitled.png)
+![image](https://github.com/gaeju/Manta-Favorita-Station-53-Reverse-Plan/assets/100760127/58a3295b-937e-427d-82c6-e0e3c7311b09)
 
 매출 목표
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c1b9274f-512a-4fbe-9944-1accee30807e/Untitled.png)
+![image](https://github.com/gaeju/Manta-Favorita-Station-53-Reverse-Plan/assets/100760127/fca24e83-cede-471c-8eeb-dab4e90a6786)
 
 매출량 TOP 5 항목에 계획된 품목 외 20 품목씩 증가 후 매출 예측량
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/905d5e43-4fee-4c04-a01a-58e712eb074c/Untitled.png)
+![image](https://github.com/gaeju/Manta-Favorita-Station-53-Reverse-Plan/assets/100760127/d2967e56-87d3-4377-8b21-50a2f1c86b7c)
 
 
 
 ## 4. 해결책 또는 대안 제시
 머신러닝으로 promotion 제품 수에 따른 판매량 예측하여
 2017.08.16-2017.08.31 여름 세일로 매출 올리기.
+
+**(1) 머신러닝 과정 & 주요 피쳐 importance**
+💡 머신러닝
+: **CatBoostRegressor**로 분석함.
+
+1. 기본모델 사용(하이퍼 파라메터 튜닝 X)
+2. 범주형 피쳐 2개 → family, type
+3. 피쳐 중요
+ ![image](https://github.com/gaeju/Manta-Favorita-Station-53-Reverse-Plan/assets/100760127/443aa243-bfd2-484e-b825-f2650a904eb6)
+4. 모델 평가
+ ![image](https://github.com/gaeju/Manta-Favorita-Station-53-Reverse-Plan/assets/100760127/0f9aacf7-7ef3-4ab5-8f5a-697e878330fa)
+
+
+**(2) 머신러닝 결과**
+| Promotion 변경 가정? | 이유 | Promotion 변경 후 결과 예측 |
+| --- | --- | --- |
+| 목요일 promotion 품목 30개씩 더 늘림 | 목요일의 promotion이 가장 적었기 때문 | 매출이 평균 135 상승 |
+| 전체적으로 20품목씩 증가 | 전체적인 프로모션 비율 유지하기 위해 | 매출이 평균 471 상승 |
+| 전체 promotion 상품 수를 평균으로 변경 | 전체적인 요일에 골고루 분포하게 하기 위하여 | 매출이 평균 305 감소 |
+
+PRODUCE
+
+| Promotion 변경 가정? | 이유 | Promotion 변경 후 결과 예측 |
+| --- | --- | --- |
+| 수요일마다 20-30의 promotion 품목 늘림 | 수요일의 promotion이 가장 많기 때문 | 매출이 평균 12 상승 |
+| 전체적으로 20품목씩 증가 | 전체적인 프로모션 비율 유지하기 위해 | 매출이 평균 687 상승 |
+| 수요일을 품목을 20씩 낮추고, 다른 날에 품목수를 20씩 늘림 | 수요일의 promotion을 다른 날로 재배치 | 매출이 평균 533 상승 |
+| 수요일 품목을 100씩 낮추고, 다른 날을 20씩 늘림 | 수요일의 promotion을 다른 날로 재배치 | 매출이 평균 226 상승 |
+
+BEVERAGES
+
+| Promotion 변경 가정? | 이유 | Promotion 변경 후 결과 예측 |
+| --- | --- | --- |
+| 전체적으로 20품목씩 증가 | 전체적인 프로모션 비율 유지하기 위해 | 매출이 평균 209 상승 |
+| 전체 promotion 상품 수를 평균으로 변경 | 전체적인 요일에 골고루 분포하게 하기 위해 | 매출이 평균 206 상승 |
+
+CLEANING
+
+| Promotion 변경 가정? | 이유 | Promotion 변경 후 결과 예측 |
+| --- | --- | --- |
+| 전체적으로 20품목씩 증가 | 전체적인 프로모션 비율 유지하기 위해 | 매출이 평균 559 상승 |
+| 전체 Promotions 상품수를 평균으로 변경 | 전체적인 프로모션 비율 유지하기 위해 | 매출이 평균 62 감소 |
+| Promotions의 최솟값을 10으로 변경, 10이상 값 유지 | 프로모션의 최소값을 올리면서 높은 프로모션값은 유지 | 매출이 평균 24 상승 |
+| Promotions의 최솟값을 15으로 변경, 15이상 값 유지 | 프로모션의 최소값을 올리면서 높은 프로모션값은 유지 | 매출이 평균 350 상승 |
+
+DAIRY
+
+| Promotion 변경 가정? | 이유 | Promotion 변경 후 결과 예측 |
+| --- | --- | --- |
+| promotion 품목 20개씩 더 늘림 | 목요일의 promotion이 가장 적었기 때문 | 매출이 평균 118 상승 |
+| 기존 promotion 평균으로 설정 | 전체적으로 프로모션 품목을 맞춰주기 위해 | 매출이 평균 142 상승 |
+| Promotion 품목을 최소 17로 설정 | 기존 데이터보다 promotion을 높이면서 평균보다는 작은 값 | 매출이 평균 110 증가 |
+
+## 결론
+
+![image](https://github.com/gaeju/Manta-Favorita-Station-53-Reverse-Plan/assets/100760127/285aa870-dadc-4311-a51a-3e88d28c9cec)
+
+매출 Top5 중 품목별 promotion 상품 수를 20개씩 늘렸을 때, **CLEANING, PRODUCES**에서만 효과적.
+
+두 항목에 대해서만 promotion 상품 수를 20개씩 증가해 집중적으로 promotion하는 것이 의미있다.
